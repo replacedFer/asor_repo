@@ -1,0 +1,4 @@
+Con la opción -a, nos muestra toda la informacion excepto -p y -i
+
+uname -a
+Linux usuarioso-virtualbox 5.4.0-56-generic #62-Ubuntu SMP Mon Nov 23 19:20:19 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
