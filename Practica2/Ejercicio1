@@ -1,0 +1,17 @@
+man ls
+
+Muestra información sobre los ARCHIVOS (el directorio actual por defecto). Ordenar entradas alfabéticamente si no se especifica 
+ninguno de -cftuvSUX ni --sort.
+Los argumentos obligatorios para las opciones largas también son obligatorios para las opciones cortas.
+
+-a -all:
+no ignore las entradas que comienzan con .
+
+- l:
+usar un formato de listado largo
+
+-d, --directorio:
+enumera los directorios, no su contenido
+
+-h, - legible por humanos:
+con -l y -s, tamaños de impresión como 1K 234M 2G, etc.
