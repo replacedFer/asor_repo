@@ -1,0 +1,33 @@
+ln -s [target file] [Symbolic filename]
+
+El comando ln en Linux crea enlaces entre archivos fuente y directorios.
+
+    -s: el comando para enlaces simbólicos.
+    [target file]: nombre del archivo existente para el cual estás creando el enlace
+    [Symbolic filename]: nombre del enlace simbólico.
+
+#################################################################################################
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ ln -s ficheroEje10 ficheroSimbolico
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ ln -s DirectorioEje10/  DirectorioSimbolico
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ ls -i
+540173 DirectorioEje10      528181 ficheroEje10      575556 Practica1
+540090 DirectorioSimbolico  529253 ficheroSimbolico  577450 Practica2
+!!!!! Los inodos de los enlaces simbolicos son distintos de los archivos de los que se hace el enlace !!!! 
+
+#################################################################################################
+ !! No se permiten enlaces rigidos a directorios !!!
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ ln ficheroEje10 ficheroRigido
+
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ ls -i    
+528181 ficheroEje10   
+528181 ficheroRigido
+529253 ficheroSimbolico  
+
+!!!! Como vemos el enlace rigido tiene el mismo numero de inodos !!!
+#################################################################################################
+Si desaparecen los enlaces rigidos o simbolicos, no ocurre nada especial, solo que se borra el fichero correspondiente.
+Pero si se borra el fichero original del enlce rigido, en enlace queda igual ya que es como una copia del enlace originaly podremos acceder a los datos
+a traves del enlace.
+Pero si se borra el enlace simbolico original, ya no se podra recuperar y el enlace simbolico queda roto ya que apunta a nada.
