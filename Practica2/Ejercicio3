@@ -1,0 +1,2 @@
+chmod 645 <fichero>
+chmod u+rw,g+r-wx,o+rx

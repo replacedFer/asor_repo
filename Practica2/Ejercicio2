@@ -1,0 +1,6 @@
+usuarioso@usuarioso-virtualbox:~$ ls -ld
+drwxr-xr-x 20 usuarioso usuarioso 4096 dic 14 09:59 .
+
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ ls -ld
+drwxrwxr-x 5 usuarioso usuarioso 4096 dic 14 09:18 .

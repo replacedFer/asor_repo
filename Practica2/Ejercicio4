@@ -1,0 +1,10 @@
+usuarioso@usuarioso-virtualbox:~$ mkdir DirectorioPrueba
+
+usuarioso@usuarioso-virtualbox:~$ ls -l
+drwxrwxr-x 2 usuarioso usuarioso 4096 dic 19 12:46 DirectorioPrueba
+
+
+usuarioso@usuarioso-virtualbox:~$ chmod -x DirectorioPrueba/
+
+usuarioso@usuarioso-virtualbox:~$ ls -l
+drw-rw-r-- 2 usuarioso usuarioso 4096 dic 19 12:46 DirectorioPrueba

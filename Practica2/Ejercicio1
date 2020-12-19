@@ -15,3 +15,18 @@ enumera los directorios, no su contenido
 
 -h, - legible por humanos:
 con -l y -s, tamaños de impresión como 1K 234M 2G, etc.
+
+-i, --inode
+ Imprime el numero de inodo de cada archivo            
+
+R, --recursive
+Lista los subdirectotios recursivamente 
+
+-1 lista un archivo por línea. Evite '\ n' con -q o -b
+
+-F, --classify
+ añadir indicador (uno de * / => @ |) a las entradas
+
+--color [= CUANDO]
+colorear la salida; CUÁNDO puede ser 'siempre' (predeterminado
+si se omite), 'auto' o 'nunca'; más información a continuación             
