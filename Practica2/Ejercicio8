@@ -1,0 +1,192 @@
+El comando "stat" Se utiliza para mostrar por pantalla los atributos de un archivo.
+
+DESCRIPCIÓN
+       Muestra el archivo o el estado del sistema de archivos.
+
+       Los argumentos obligatorios para las opciones largas son obligatorios para las opciones cortas
+       también.
+
+       -L, --dereferencia
+              seguir enlaces
+
+       -f, --file-system
+              mostrar el estado del sistema de archivos en lugar del estado del archivo
+
+       -c --format = FORMATO
+              utilice el FORMATO especificado en lugar del predeterminado; generar un nuevo
+              línea después de cada uso de FORMAT
+
+       --printf = FORMATO
+              como --format, pero interprete los escapes de barra invertida y no supere
+              poner una nueva línea final obligatoria; si quieres una nueva línea, incluye
+              \ n en FORMATO
+
+       -t, --terse
+              imprime la información en forma concisa
+
+       : ayuda a mostrar esta ayuda y salir
+
+       --versión
+              generar información de versión y salir.
+
+
+NOMBRE
+
+       stat, fstat, lstat - obtiene el estado de un fichero
+
+SINOPSIS
+
+       #include <sys/types.h>
+       #include <sys/stat.h>
+       #include <unistd.h>
+
+       int stat(const char *file_name, struct stat *buf);
+       int fstat(int filedes, struct stat *buf);
+       int lstat(const char *file_name, struct stat *buf);
+
+DESCRIPCIÓN
+
+       Estas  funciones  devuelven información del fichero especificado. No se necesitan derechos
+       de acceso al fichero para conseguir la  información  pero  sí  se  necesitan  derechos  de
+       búsqueda para todos los directorios del camino al fichero.
+
+       stat examina el fichero al que apunta file_name y llena buf.
+
+       lstat  es  idéntico  a stat, salvo en caso de que se trate de un enlace simbólico, en cuyo
+       caso se examina el enlace mismo, no el fichero al que hace referencia.
+
+       fstat es idéntico a stat, pero sólo el fichero abierto apuntado por filedes (tal y como lo
+       devuelve open(2)) es examinado en lugar de file_name.
+
+       Todos devuelven una estructura stat, que contien los siguientes campos:
+
+              struct stat {
+                  dev_t         st_dev;      /* dispositivo */
+                  ino_t         st_ino;      /* inodo */
+                  mode_t        st_mode;     /* protección */
+                  nlink_t       st_nlink;    /* número de enlaces físicos */
+                  uid_t         st_uid;      /* ID del usuario propietario */
+                  gid_t         st_gid;      /* ID del grupo propietario */
+                  dev_t         st_rdev;     /* tipo dispositivo (si es
+                                                dispositivo inodo) */
+                  off_t         st_size;     /* tamaño total, en bytes */
+                  blksize_t     st_blksize;  /* tamaño de bloque para el
+                                                sistema de ficheros de E/S */
+                  blkcnt_t      st_blocks;   /* número de bloques asignados */
+                  time_t        st_atime;    /* hora último acceso */
+                  time_t        st_mtime;    /* hora última modificación */
+                  time_t        st_ctime;    /* hora último cambio */
+              };
+
+       El valor st_size da el tamaño del fichero (si es un fichero regular o un enlace simbólico)
+       en bytes. El tamaño de un enlace simbólico es la longitud del nombre de ruta que contiene,
+       sin contar el caracter NUL final.
+
+       El  valor  st_blocks  da  el  tamaño del fichero en bloques de 512 bytes.  (Éste puede ser
+       menor que st_size/512 p.e. cuando el fichero tenga huecos.)  El  valor  st_blksize  da  el
+       tamaño  de  bloque  "preferido"  para  operaciones  de  E/S eficientes sobre el sistema de
+       ficheros.  (Escribir en un fichero en porciones más pequeñas puede producir una  secuencia
+       leer-modificar-reescribir ineficiente).
+
+       No  todos los sistemas de ficheros en Linux implementan todos los campos de hora.  Algunos
+       tipos de sistemas de ficheros permiten el montaje de tal manera que los accesos al fichero
+       no provocan una actualización del campo st_atime (Vea `noatime' en mount(8).)
+
+       El  campo  st_atime  es  modificado  por accesos al fichero, p.e. por execve(2), mknod(2),
+       pipe(2), utime(2) y read(2) (de más de cero bytes). Otras rutinas, como mmap(2), pueden  o
+       no actualizar st_atime.
+
+       El campo st_mtime es modificado por cambios en el fichero, p.e. por mknod(2), truncate(2),
+       utime(2) y write(2) (de más de cero bytes).  Además, el campo st_mtime de un directorio es
+       modificado  por  la creación o borrado de ficheros en dicho directorio.  El campo st_mtime
+       no es modificado por cambios en el propietario, grupo, contador de enlaces duros, o modo.
+
+       El campo st_ctime es modificado por la escritura o por cambiar información del  inodo  (es
+       decir, propietario, grupo, contador de enlaces, modo, etc.).
+
+       Se definen las siguientes macros POSIX para comprobar el tipo de fichero:
+
+              S_ISLNK(m)  es un enlace simbólico?
+
+              S_ISREG(m)  un fichero regular?
+
+              S_ISDIR(m)  un directorio?
+
+              S_ISCHR(m)  un dispositivo de caracteres?
+
+              S_ISBLK(m)  un dispositivo de bloques?
+
+              S_ISFIFO(m) una tubería nombrada (fifo)?
+
+              S_ISLNK(m)  un enlace simbólico? (No presente en POSIX.1-1996.)
+
+              S_ISSOCK(m) un conector (socket)? (No presente en POSIX.1-1996.)
+
+       Se definen las siguientes banderas para el campo st_mode:
+
+       S_IFMT     0017000   máscara de bits para los campos de bit del tipo
+                            de fichero (no POSIX)
+       S_IFSOCK   0140000   conector (no POSIX)
+       S_IFLNK    0120000   enlace simbólico (no POSIX)
+       S_IFREG    0100000   fichero regular (no POSIX)
+       S_IFBLK    0060000   dispositivo de bloques (no POSIX)
+       S_IFDIR    0040000   directorio (no POSIX)
+       S_IFCHR    0020000   dispositivo de caracteres (no POSIX)
+       S_IFIFO    0010000   fifo o tubería nombrada (no POSIX)
+       S_ISUID    0004000   poner bit UID
+       S_ISGID    0002000   poner bit GID
+       S_ISVTX    0001000   sticky bit (no POSIX)
+       S_IRWXU    00700     usuario (propietario del fichero) tiene permisos
+                            de lectura, escritura y ejecución
+       S_IRUSR    00400     usuario tiene premiso de lectura (igual que
+                            S_IREAD, que no es POSIX)
+       S_IWUSR    00200     usuario tiene premiso de escritura (igual que
+                            S_IWRITE, que no es POSIX)
+       S_IXUSR    00100     usuario tiene premiso de ejecución (igual que
+                            S_IEXEC, que no es POSIX)
+       S_IRWXG    00070     grupo tiene permisos de lectura, escritura y
+                            ejecución
+       S_IRGRP    00040     grupo tiene permiso de lectura
+       S_IWGRP    00020     grupo tiene permiso de escritura
+       S_IXGRP    00010     grupo tiene permiso de ejecución
+       S_IRWXO    00007     otros tienen permisos de lectura, escritura y
+                            ejecución
+       S_IROTH    00004     otros tienen permiso de lectura
+       S_IWOTH    00002     otros tienen permiso de escritura
+       S_IXOTH    00001     otros tienen permiso de ejecución
+
+       El bit SETGID (S_ISGID) tiene varios usos especiales: para un directorio, indica que se va
+       a usar la semántica BSD para el directorio: los ficheros creados allí heredarán su GID del
+       directorio,  no  del  GID  efectivo  del  proceso que crea cada fichero, y los directorios
+       creados allí también tendrán el bit S_ISGID activo.  Para un fichero que no tiene  el  bit
+       de ejecución del grupo (S_IXGRP) activo, indica bloqueo obligatorio de ficheros/registros.
+
+       El bit `sticky' (S_ISVTX) en un directorio significa que un fichero de ese directorio sólo
+       puede ser renombrado o borrado por el propietario del  fichero,  por  el  propietario  del
+       directorio y por el superusuario.
+
+VALOR DEVUELTO
+
+       Se  devuelve  cero  si  hubo  éxito. Si hubo error, se devuelve -1, y errno es actualizado
+       apropiadamente.
+
+ERRORES
+
+       EBADF  filedes incorrecto.
+
+       ENOENT No existe un componente del camino file_name o el camino es una cadena vacía.
+
+       ENOTDIR
+              Un componente del camino no es un directorio.
+
+       ELOOP  Se han encontrado demasiados enlaces simbólicos al recorrer el camino.
+
+       EFAULT Dirección errónea.
+
+       EACCES Permiso denegado.
+
+       ENOMEM Fuera de memoria (es decir, memoria del núcleo).
+
+       ENAMETOOLONG
+              Nombre de fichero demasiado largo.
+

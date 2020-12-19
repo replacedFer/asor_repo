@@ -1,0 +1,22 @@
+Con umask quitamos los permiso
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica2/Ejercicio5$ umask
+0002
+
+Vemos qque por defecto en el usuario no nos quita ningun permiso, en el grupo no nos quita ningun permiso, pero para Otros nos quita permisos de escritura
+
+
+Ahora vamos a quitar permisos de escritura los del "grupo" y ningun permiso los de "otros"
+umask 0027
+
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica2/Ejercicio5$ touch prueba
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica2/Ejercicio5$ ls -l
+total 24
+-rwxrwxr-x 1 usuarioso usuarioso 16736 dic 19 13:21 eje5
+-rw-rw-r-- 1 usuarioso usuarioso   304 dic 19 13:21 eje5.c
+-rw-r--r-x 1 usuarioso usuarioso     0 dic 19 13:23 FicheroCreado
+-rw-r----- 1 usuarioso usuarioso     0 dic 19 14:14 prueba
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica2/Ejercicio5$ 
+
+Como vemos se han aplicado bien los cambios ya que en el nuevo fichero "prueba" los permisos por defecto son los que queriamos
