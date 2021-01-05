@@ -1,0 +1,47 @@
+usuarioso@usuarioso-virtualbox:~$ ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000   18862    2380  0  80   0 -  3371 do_wai pts/1    00:00:00 bash
+4 R  1000   20454   18862  0  80   0 -  3527 -      pts/1    00:00:00 ps
+
+
+usuarioso@usuarioso-virtualbox:~$ chrt -p 18862
+política actual de planificación del pid 18862: SCHED_OTHER
+política actual de planificación del pid 18862: 0
+
+
+usuarioso@usuarioso-virtualbox:~$ sudo -i 
+[sudo] contraseña para usuarioso: 
+
+root@usuarioso-virtualbox:~# chrt -f -p 12 18862
+root@usuarioso-virtualbox:~# cerrar sesión
+
+usuarioso@usuarioso-virtualbox:~$ chrt -p 18862
+política actual de planificación del pid 18862: SCHED_FIFO
+política actual de planificación del pid 18862: 12
+
+usuarioso@usuarioso-virtualbox:~$ ls
+asor_repo  Desktop           Documentos  Música      Practica2  Público
+Descargas  DirectorioPrueba  Imágenes    Plantillas  Practica3  Vídeos
+
+usuarioso@usuarioso-virtualbox:~$ cd asor_repo/
+
+usuarioso@usuarioso-virtualbox:~/asor_repo$ ls
+asor_repo
+
+usuarioso@usuarioso-virtualbox:~/asor_repo$ cd asor_repo/
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo$ cd Practica3
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica3$ cd Ejercicio2/
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica3/Ejercicio2$ ls
+eje2  Eje2.c
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica3/Ejercicio2$ ./eje2 
+Politica de planificacion  SCHED_OTHER 
+Prioridad del proceso: 12
+Valor maximo de la prioridad: 0, valor minimo de la prioridad:  0
+
+
+Por lo que vemos al ejecutar el codigo despues de cambiar la porlitica de planificacio ny la prioridad, podemos ver que la prioridad se conserva en 12, pero 
+la politica de planificacion cambia a la de por defecto.

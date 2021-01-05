@@ -1,0 +1,52 @@
+Para cambiar el nice de un proceso activo hay que utilizar el comando renice y acceder como superusuario
+
+root@usuarioso-virtualbox:~# ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S     0   18763    2383  0  80   0 -  3733 poll_s pts/1    00:00:00 sudo
+4 S     0   18765   18763  0  80   0 -  3369 do_wai pts/1    00:00:00 bash
+4 R     0   18775   18765  0  80   0 -  3527 -      pts/1    00:00:00 ps
+
+
+root@usuarioso-virtualbox:~# renice -n -10 -p 18763
+18763 (process ID) prioridad anterior 0, nueva prioridad -10
+root@usuarioso-virtualbox:~# ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S     0   18763    2383  0  70 -10 -  3733 poll_s pts/1    00:00:00 sudo
+4 S     0   18765   18763  0  80   0 -  3369 do_wai pts/1    00:00:00 bash
+4 R     0   18781   18765  0  80   0 -  3527 -      pts/1    00:00:00 ps
+
+
+###############
+Para cambiar la politica de planificacion de un proceso 
+
+usuarioso@usuarioso-virtualbox:~$ ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000   18644    2380  0  80   0 -  3404 do_wai pts/2    00:00:00 bash
+4 R  1000   19092   18644  0  80   0 -  3527 -      pts/2    00:00:00 ps
+
+usuarioso@usuarioso-virtualbox:~$ chrt -p 18644
+política actual de planificación del pid 18644: SCHED_OTHER
+política actual de planificación del pid 18644: 0
+
+Una vez que vemos que politica de planificacion tien y que prioridad, pasamos a cambiarla
+
+// Primero hay que pasar al usuario root
+
+usuarioso@usuarioso-virtualbox:~$ sudo -i
+[sudo] contraseña para usuarioso: 
+
+root@usuarioso-virtualbox:~# ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S     0   19128   18644  0  80   0 -  3734 poll_s pts/2    00:00:00 sudo
+4 S     0   19129   19128  1  80   0 -  3369 do_wai pts/2    00:00:00 bash
+4 R     0   19138   19129  0  80   0 -  3527 -      pts/2    00:00:00 ps
+
+
+root@usuarioso-virtualbox:~# chrt -f -p 12 18644    // cambiamos la prioridad del proceso anterior con el pid que habimos sacado
+                                                    // Para salir del usuario root ctrl+d
+// Comprobamos que se ha cambiado la politica de prioridad
+
+usuarioso@usuarioso-virtualbox:~$ chrt -p 18644
+política actual de planificación del pid 18644: SCHED_FIFO
+política actual de planificación del pid 18644: 12
+
