@@ -1,0 +1,192 @@
+Comando ps -->> para ver  los procesos del sistema y su estrado
+
+- Mostrar todos los procesos del usuario actual en formato extendido
+
+    usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica3/Ejercicio2$ ps -l
+        F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+        0 S  1000   23786    2380  0  80   0 -  3371 do_wai pts/2    00:00:00 bash
+        4 R  1000   23793   23786  0  80   0 -  3527 -      pts/2    00:00:00 ps
+- Mostrar los procesos del sistema, incluyendo el identificador del proceso, el identificador del grupo de procesos, el identificador de sesion, el estado y la linea de Comando.
+
+    usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica3/Ejercicio2$ ps -e -o pid,pgrp,session,state,cmd
+    PID    PGRP    SESS S CMD
+      1       1       1 S /sbin/init splash
+      2       0       0 S [kthreadd]
+      3       0       0 I [rcu_gp]
+      4       0       0 I [rcu_par_gp]
+      6       0       0 I [kworker/0:0H-kblockd]
+      9       0       0 I [mm_percpu_wq]
+     10       0       0 S [ksoftirqd/0]
+     11       0       0 I [rcu_sched]
+     12       0       0 S [migration/0]
+     13       0       0 S [idle_inject/0]
+     14       0       0 S [cpuhp/0]
+     15       0       0 S [kdevtmpfs]
+     16       0       0 I [netns]
+     17       0       0 S [rcu_tasks_kthre]
+     18       0       0 S [kauditd]
+     19       0       0 S [khungtaskd]
+     20       0       0 S [oom_reaper]
+     21       0       0 I [writeback]
+     22       0       0 S [kcompactd0]
+     23       0       0 S [ksmd]
+     24       0       0 S [khugepaged]
+     70       0       0 I [kintegrityd]
+     71       0       0 I [kblockd]
+     72       0       0 I [blkcg_punt_bio]
+     73       0       0 I [tpm_dev_wq]
+     74       0       0 I [ata_sff]
+     75       0       0 I [md]
+     76       0       0 I [edac-poller]
+     77       0       0 I [devfreq_wq]
+     78       0       0 S [watchdogd]
+     81       0       0 S [kswapd0]
+     82       0       0 S [ecryptfs-kthrea]
+     84       0       0 I [kthrotld]
+     85       0       0 I [acpi_thermal_pm]
+     86       0       0 S [scsi_eh_0]
+     87       0       0 I [scsi_tmf_0]
+     88       0       0 S [scsi_eh_1]
+     89       0       0 I [scsi_tmf_1]
+     91       0       0 I [vfio-irqfd-clea]
+     93       0       0 I [ipv6_addrconf]
+    102       0       0 I [kstrp]
+    105       0       0 I [kworker/u3:0]
+    118       0       0 I [charger_manager]
+    119       0       0 I [kworker/0:1H-kblockd]
+    164       0       0 S [scsi_eh_2]
+    165       0       0 I [scsi_tmf_2]
+    166       0       0 I [cryptd]
+    184       0       0 S [irq/18-vmwgfx]
+    185       0       0 I [ttm_swap]
+    239       0       0 S [jbd2/sda1-8]
+    240       0       0 I [ext4-rsv-conver]
+    287     287     287 S /lib/systemd/systemd-journald
+    325     325     325 S /lib/systemd/systemd-udevd
+    334     334     334 S /lib/systemd/systemd-resolved
+    373     373     373 S /usr/sbin/haveged --Foreground --verbose=1 -w 1024
+    380     380     380 S /usr/lib/accountsservice/accounts-daemon
+    381     381     381 S /usr/sbin/acpid
+    384     384     384 S avahi-daemon: running [usuarioso-virtualbox.local]
+    385     385     385 S /usr/sbin/cron -f
+    387     387     387 S /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --sysl
+    389     389     389 S /usr/sbin/NetworkManager --no-daemon
+    391     391     391 S /usr/sbin/dundee -n
+    400     400     400 S /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+    401     401     401 S /usr/sbin/ofonod -n
+    405     405     405 S /usr/lib/policykit-1/polkitd --no-debug
+    407     407     407 S /usr/sbin/rsyslogd -n -iNONE
+    421     421     421 S /lib/systemd/systemd-logind
+    423     423     423 S /usr/lib/udisks2/udisksd
+    426     426     426 S /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+    451     384     384 S avahi-daemon: chroot helper
+    487       0       0 I [iprt-VBoxWQueue]
+    609     608     608 S /usr/sbin/VBoxService
+    627     627     627 S /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+    639     639     639 S /usr/sbin/ModemManager --filter-policy=strict
+    710     710     710 S /usr/bin/whoopsie -f
+    718     718     718 S /usr/sbin/kerneloops --test
+    720     720     720 S /usr/sbin/kerneloops
+    822     822     822 S /usr/bin/sddm
+    837     837     837 S /usr/lib/xorg/Xorg -nolisten tcp -auth /var/run/sddm/{e191fe3b-a605-4da5-84ed-270cfb8e72c8} -back
+    857     857     857 S /usr/libexec/rtkit-daemon
+    865     865     865 S /usr/lib/bluetooth/bluetoothd
+    884     822     822 S /usr/lib/x86_64-linux-gnu/sddm/sddm-helper --socket /tmp/sddm-autha1ad985f-6ccd-4406-82fd-4ae8527
+    897     897     897 S /lib/systemd/systemd --user
+    898     897     897 S (sd-pam)
+    910     910     910 S /usr/bin/pulseaudio --daemonize=no --log-target=journal
+    916     822     822 S lxqt-session
+    920     920     920 S /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --sys
+    965     964     964 S /usr/bin/VBoxClient --clipboard
+    966     964     964 S /usr/bin/VBoxClient --clipboard
+    975     974     974 S /usr/bin/VBoxClient --seamless
+    976     974     974 S /usr/bin/VBoxClient --seamless
+    982     981     981 S /usr/bin/VBoxClient --draganddrop
+    983     981     981 S /usr/bin/VBoxClient --draganddrop
+    987     986     986 S /usr/bin/VBoxClient --vmsvga
+    988     986     986 S /usr/bin/VBoxClient --vmsvga
+    993     993     993 S /usr/bin/ssh-agent /usr/bin/im-launch env LXQT_DEFAULT_OPENBOX_CONFIG=/etc/xdg/xdg-Lubuntu/openbo
+   1029     822     822 S /usr/bin/openbox --config-file /home/usuarioso/.config/openbox/lxqt-rc.xml
+   1032    1031    1031 S /usr/libexec/at-spi-bus-launcher --launch-immediately
+   1034    1033    1033 S /usr/libexec/geoclue-2.0/demos/agent
+   1039    1031    1031 S /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --prin
+   1047     822     822 S /usr/bin/pcmanfm-qt --desktop --profile=lxqt
+   1048    1048    1048 S /usr/libexec/gvfsd
+   1049     822     822 S /usr/bin/lxqt-globalkeysd
+   1050     822     822 S /usr/bin/lxqt-notificationd
+   1051     822     822 S /usr/bin/lxqt-panel
+   1052     822     822 S /usr/bin/lxqt-policykit-agent
+   1053     822     822 S /usr/bin/lxqt-runner
+   1055    1054    1054 S /usr/bin/xscreensaver -no-splash
+   1058    1057    1057 S /usr/bin/python3 /usr/share/system-config-printer/applet.py
+   1076    1075    1075 S /bin/sh /usr/lib/lubuntu-update-notifier/lubuntu-upg-notifier.sh
+   1098    1048    1048 S /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+   1130    1048    1048 S /usr/libexec/gvfsd-trash --spawner :1.8 /org/gtk/gvfs/exec_spaw/0
+   1138    1138    1138 S /usr/libexec/gvfs-udisks2-volume-monitor
+   1143    1143    1143 S /usr/libexec/gvfs-mtp-volume-monitor
+   1147    1147    1147 S /usr/libexec/gvfs-gphoto2-volume-monitor
+   1151    1151    1151 S /usr/libexec/gvfs-afc-volume-monitor
+   1157    1157    1157 S /usr/libexec/gvfs-goa-volume-monitor
+   1172    1172    1172 S /usr/lib/upower/upowerd
+   1198     822     822 S /usr/bin/lxqt-powermanagement
+   1200    1199    1199 S /usr/bin/qlipper
+   1202    1201    1201 S /usr/bin/nm-tray
+   1307    1306    1306 S /usr/share/code/code --no-sandbox --unity-launch
+   1309    1306    1306 S /usr/share/code/code --type=zygote --no-zygote-sandbox --no-sandbox
+   1310    1306    1306 S /usr/share/code/code --type=zygote --no-sandbox
+   1357    1306    1306 S /usr/share/code/code --type=utility --field-trial-handle=6435308392161625167,10104784603841776278
+   1358    1306    1306 S /usr/share/code/code --type=gpu-process --field-trial-handle=6435308392161625167,1010478460384177
+   1377    1031    1031 S /usr/libexec/at-spi2-registryd --use-gnome-session
+   1412    1306    1306 S /usr/share/code/code --type=renderer --disable-color-correct-rendering --no-sandbox --field-trial
+   1499     920     920 S /usr/bin/gnome-keyring-daemon --start --foreground --components=secrets
+   1576    1048    1048 S /usr/libexec/gvfsd-network --spawner :1.8 /org/gtk/gvfs/exec_spaw/1
+   1592    1048    1048 S /usr/libexec/gvfsd-dnssd --spawner :1.8 /org/gtk/gvfs/exec_spaw/3
+   1600     920     920 S /usr/libexec/dconf-service
+   2055    1306    1306 S /usr/share/code/code --type=renderer --disable-color-correct-rendering --no-sandbox --field-trial
+   2074    2074    2074 S /bin/bash
+   2083    1306    1306 S /usr/share/code/code --inspect-port=0 /usr/share/code/resources/app/out/bootstrap-fork --type=ext
+   2092    1306    1306 S /usr/share/code/code /usr/share/code/resources/app/out/bootstrap-fork --type=watcherService
+   2380    2379    2379 S /usr/bin/qterminal
+  17934       0       0 I [xfsalloc]
+  17935       0       0 I [xfs_mru_cache]
+  17940       0       0 S [jfsIO]
+  17941       0       0 S [jfsCommit]
+  17942       0       0 S [jfsSync]
+  18862   18862   18862 S /bin/bash
+  19249    1306    1306 S /home/usuarioso/.vscode/extensions/ms-vscode.cpptools-1.1.3/bin/cpptools
+  20285    1306    1306 S /home/usuarioso/.vscode/extensions/ms-vscode.cpptools-1.1.3/bin/cpptools-srv 19249 2
+  20868   20868   20868 S /usr/libexec/fwupd/fwupd
+  20903   20903   20903 S /usr/sbin/cupsd -l
+  20905   20905   20905 S /usr/sbin/cups-browsed
+  23709    1075    1075 S sleep 3600
+  23718   23718   18862 S man ps
+  23728   23718   18862 S pager
+  23786   23786   23786 S /bin/bash
+  23860       0       0 I [kworker/0:5-events]
+  23865   23864   23864 S /usr/lib/firefox/firefox
+  23932   23864   23864 S /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 1 -prefMapSize 230085 -p
+  23962   23864   23864 S /usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 288 -prefMapSize 230085 
+  23992   23864   23864 S /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 6439 -prefMapSize 230085
+  24033   23864   23864 S /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 6577 -prefMapSize 230085
+  24092       0       0 I [kworker/u2:2-events_unbound]
+  24110       0       0 I [kworker/0:0-events]
+  24151   23864   23864 S /usr/lib/firefox/firefox -contentproc -childID 5 -isForBrowser -prefsLen 11062 -prefMapSize 23008
+  24176   23864   23864 S /usr/lib/firefox/firefox -contentproc -childID 6 -isForBrowser -prefsLen 11062 -prefMapSize 23008
+  24213       0       0 I [kworker/u2:0-events_power_efficient]
+  24226       0       0 I [kworker/u2:1-events_unbound]
+  24240   24240   23786 R ps -e -o pid,pgrp,session,state,cmd
+
+
+-Obsevar el identificador de proceso, grupo de procesosy sesion de procesos.
+        usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica3/Ejercicio2$ ps  -o pid,pgrp,session,state,cmd
+            PID    PGRP    SESS S CMD
+            23786   23786   23786 S /bin/bash
+            24268   24268   23786 R ps -o pid,pgrp,session,state,cmd
+
+    ¿Qué identificadores comparten la shell y los programas que se ejecutan en ella?
+        Como vemos los unicos identificador que comparten son los de sesion.
+    ¿Cuál es el identificador de grupo de proceso cuando se crea un nuevo proceso?
+        Su identificador es igual que el PID del proceso lider del grupo
+
+
+
