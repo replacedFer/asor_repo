@@ -1,21 +1,13 @@
-/*
-    Identificadores del proceso
-        - Id proceso
-        - Id padre
-        - Id grupo
-        - Sesion
-    Num max ficheros que puede abrir el proceso y directorio de trabajo actual
-*/
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/resource.h>
- #include <stdlib.h>
+#include <stdlib.h>
 
 
 
-int main (int argc, char *argv[]){
+void imprimirDatos(){
     //pid proceso
     pid_t proceso = getpid();
     printf("PID del proceso es: %d\n",proceso);
@@ -33,7 +25,7 @@ int main (int argc, char *argv[]){
     
         if(sesion == -1){
             perror("Error en id de sesion");
-            return -1;
+            return ;
         }
     printf("Id de la sesion es: %d\n",sesion);
 
@@ -44,7 +36,7 @@ int main (int argc, char *argv[]){
 
         if (path == NULL){
             perror("Error en obtener la ruta del directorio actual");
-            return -1;
+            return ;
         }
     printf("La ruta del directorio actual es: %s\n",path);
 
@@ -58,5 +50,48 @@ int main (int argc, char *argv[]){
     
     printf("Numero maximo de ficheros que puede abrir el proceso: %ld\n",rlim.rlim_max);
     free(path);
+
+    return;
+}
+
+int main (int argc, char *argv[]){
+
+
+    pid_t pid = fork();
+
+    if(pid == -1){
+        perror("Error en el fork");
+        exit(1);
+        
+    }else if( pid == 0){ // proceso hijo
+
+        printf("\n********ESTAMOS EN EL PROCESO HIJO******** \n");
+        // creamos una sesion nueva
+        pid_t sesion = setsid();
+
+        //Cambiamos directorio de trabajo
+          char *path = "/tmp" ;
+            int res = chdir(path);
+            if(res == -1){
+                perror("Error al cambiar la ruta del directorio");
+            }
+
+        if (sesion == -1){
+            perror("Error en crear la nueva sesion\n");
+            exit(1);
+        }
+        imprimirDatos();
+       // exit(0);
+    }else{ // proceso padre
+        printf("********ESTAMOS EN EL PROCESO padre******** \n");
+    }
+
     return 0;
 }
+
+/*
+
+si el proceso padre termina antes que lo haga el hijo el proceso hijo no desaparece totalmente sino que queda en un estado conocido como zombie. Se soluciona poniendo en el padre un 
+wait(), con esto hacemos que el padre espere a la finalizacion de los hijos.
+
+*/
