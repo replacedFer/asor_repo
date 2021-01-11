@@ -31,9 +31,9 @@ int main (int argc, char *argv[]){
             exit(1);
         }
 
-        int df1 = open("/tmp/daemon.out",O_RDWR | O_CREAT |O_TRUNC,0777);
-        int df2 = open("/tmp/daemon.err",O_RDWR | O_CREAT|O_TRUNC,0777);
-        int df3 = open("/dev/null",O_RDWR | O_CREAT|O_TRUNC,0777);
+        int df1 = open("/tmp/daemon.out",O_RDWR | O_CREAT ,0777);
+        int df2 = open("/tmp/daemon.err",O_RDWR | O_CREAT,0777);
+        int df3 = open("/dev/null",O_RDWR | O_CREAT,0777);
 
         if (df1 == -1 || df2== -1 || df3== -1){
             perror("error en uno de los open()\n");

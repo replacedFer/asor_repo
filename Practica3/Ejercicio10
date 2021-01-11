@@ -1,0 +1,80 @@
+Terminal 1: 
+usuarioso@usuarioso-virtualbox:~$ sleep 600
+
+Terminal 2:
+
+usuarioso@usuarioso-virtualbox:~$ ps -e
+    PID TTY          TIME CMD
+      1 ?        00:00:02 systemd
+      2 ?        00:00:00 kthreadd
+      3 ?        00:00:00 rcu_gp
+      4 ?        00:00:00 rcu_par_gp
+      6 ?        00:00:00 kworker/0:0H-kblockd
+      8 ?        00:00:00 kworker/u2:0-events_unbound
+      9 ?        00:00:00 mm_percpu_wq
+     10 ?        00:00:00 ksoftirqd/0
+     11 ?        00:00:00 rcu_sched
+     12 ?        00:00:00 migration/0
+     13 ?        00:00:00 idle_inject/0
+     14 ?        00:00:00 cpuhp/0
+     15 ?        00:00:00 kdevtmpfs
+     16 ?        00:00:00 netns
+            .
+            .
+            .
+
+   1747 pts/3    00:00:00 man
+   1758 pts/3    00:00:00 pager
+   1774 pts/1    00:00:00 sleep
+   1788 pts/2    00:00:00 ps
+
+usuarioso@usuarioso-virtualbox:~$ kill -9 1774  // mandamos la  señal de terminacion del proceso (SIGKILL)
+
+
+Terminal 1:
+
+Terminado (killed)
+usuarioso@usuarioso-virtualbox:~$ 
+
+****************************************************************************************************
+Terminal 1: 
+usuarioso@usuarioso-virtualbox:~$ sleep 600
+
+Terminal 2:
+
+    usuarioso@usuarioso-virtualbox:~$ ps -e
+    PID TTY          TIME CMD
+      1 ?        00:00:02 systemd
+      2 ?        00:00:00 kthreadd
+      3 ?        00:00:00 rcu_gp
+      4 ?        00:00:00 rcu_par_gp
+      6 ?        00:00:00 kworker/0:0H-kblockd
+            .
+            .
+            .
+    1901 ?        00:00:00 kworker/u2:0-events_unbound
+    1903 pts/1    00:00:00 sleep
+    1904 pts/2    00:00:00 ps
+
+    usuarioso@usuarioso-virtualbox:~$ kill -19 1903
+
+
+Terminal 1:
+
+    [1]+  Detenido                sleep 600
+
+
+Terminal 2:
+
+    usuarioso@usuarioso-virtualbox:~$ kill -s SIGCONT 1903
+
+Terminal 1:
+    usuarioso@usuarioso-virtualbox:~$  jobs
+    [1]+  Ejecutando              sleep 600 &
+
+Terminal 2:
+    usuarioso@usuarioso-virtualbox:~$ kill -9 1903
+
+Terminal 1:
+    usuarioso@usuarioso-virtualbox:~$ jobs
+    [1]+  Terminado (killed)      sleep 600
