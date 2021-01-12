@@ -29,11 +29,11 @@ int main (int argc, char *argv[]){
     /*CODIGO PROTEGIDO FRENTE A SEÑALES SIGINT Y SIGTSTP*/
 
     //Obtener el valor de la variable de entorno SLEEP_SECS
-    char *var_entorno = getenv("SLEEP_SECS");
+   // char *var_entorno = getenv("SLEEP_SECS");
 
     // Suspendemos la ejecucion con sleep
-     sleep(atoi(var_entorno));
-
+    // sleep(atoi(var_entorno));
+    sleep(20);
 
     //Comprobamos las señales pendientes
         sigset_t sig_pendientes;
