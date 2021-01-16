@@ -1,0 +1,47 @@
+**********************************************************************************
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ mkfifo tuberia
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ ls
+Ejercicio1  Ejercicio2  Ejercicio3  tuberia
+
+
+
+**********************************************************************************
+ INFORMACION DE LA TUBERIA 
+
+usuarioso@usuarioso-virtualbox:~$ stat tuberia 
+  Fichero: tuberia
+  Tamaño: 0             Bloques: 0          Bloque E/S: 4096   `fifo'
+Dispositivo: 801h/2049d Nodo-i: 553551      Enlaces: 1
+Acceso: (0664/prw-rw-r--)  Uid: ( 1000/usuarioso)   Gid: ( 1001/usuarioso)
+Acceso: 2021-01-16 17:02:55.149813166 +0100
+Modificación: 2021-01-16 17:02:55.149813166 +0100
+      Cambio: 2021-01-16 17:02:55.149813166 +0100
+    Creación: -
+
+
+usuarioso@usuarioso-virtualbox:~$ ls -la
+prw-rw-r--  1 usuarioso usuarioso      0 ene 16 17:02 tuberia
+
+ **********************************************************************************
+
+PROBANDO SU FUNCIONAMIENTO
+
+
+TERMINAL1: 
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ echo "Hola mundo" > hola.txt
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ ls
+Ejercicio1  Ejercicio2  Ejercicio3  hola.txt  tuberia
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ cat hola.txt > tuberia 
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ 
+
+
+TEMINAL2:
+
+usuarioso@usuarioso-virtualbox:~/asor_repo/asor_repo/Practica4$ cat tuberia 
+Hola mundo
+
+
+
+
+**********************************************************************************
+
